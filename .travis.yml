@@ -15,7 +15,7 @@ before_script:
   - sudo sed -i "s/\DOCKER_OPTS=\"/DOCKER_OPTS=\"--insecure-registry=moaf-nexus.westeurope.cloudapp.azure.com:443 /g" /etc/default/docker
   - sudo cat /etc/default/docker
   - sudo service docker restart
-  - $DOCKERCONFIG/docker-compose up -d
+  - ./$DOCKERCONFIG/docker-compose up -d
 
 script:
   - mvn install -DskipTests=true -B -V
