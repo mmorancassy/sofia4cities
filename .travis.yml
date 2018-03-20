@@ -1,0 +1,25 @@
+sudo: required
+
+services:
+  - docker
+  
+language: java  
+  
+env:
+  - SYSTEMCONFIG='config/init' 
+  - IMAGEGENPATH='docker-deployment'
+  - DOCKERCONFIG='docker-deployment/data'   
+  - BRANCHNAME='develop'  
+  
+before_script:
+  - sudo sed -i "s/\DOCKER_OPTS=\"/DOCKER_OPTS=\"--insecure-registry=moaf-nexus.westeurope.cloudapp.azure.com:443 /g" /etc/default/docker
+  - sudo cat /etc/default/docker
+  - sudo service docker restart
+  - $DOCKERCONFIG/docker-compose up -d
+
+script:
+  - mvn install -DskipTests=true -B -V
+  
+after_script:
+  - docker-compose down      
+    
