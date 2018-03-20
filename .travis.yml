@@ -6,9 +6,10 @@ services:
 language: java  
   
 env:
-  - SYSTEMCONFIG='config/init' 
-  - IMAGEGENPATH='docker-deployment'
-  - DOCKERCONFIG='docker-deployment/data'    
+  - SYSTEMCONFIG=config/init
+  - IMAGEGENPATH=docker-deployment
+  - DOCKERCONFIG=docker-deployment/data   
+  - BRANCHNAME=develop 
   
 before_script:
   - sudo sed -i "s/\DOCKER_OPTS=\"/DOCKER_OPTS=\"--insecure-registry=moaf-nexus.westeurope.cloudapp.azure.com:443 /g" /etc/default/docker
